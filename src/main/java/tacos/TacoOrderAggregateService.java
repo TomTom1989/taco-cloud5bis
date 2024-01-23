@@ -16,28 +16,35 @@ public class TacoOrderAggregateService {
  private final OrderRepository orderRepo;
  
  public Mono<TacoOrder> save(TacoOrder tacoOrder) {
- return Mono.just(tacoOrder)
-.flatMap(order -> {
-List<Taco> tacos = order.getTacos();
-order.setTacos(new ArrayList<>());
-return tacoRepo.saveAll(tacos)
-.map(taco -> {
-order.addTaco(taco);
-return order;
-}).last();
-})
-.flatMap(orderRepo::save);
- }
+	    return Mono.just(tacoOrder)
+	        .flatMap(order -> {
+	            List<Taco> tacos = order.getTacos();
+	            order.setTacos(new ArrayList<>());
+	            return tacoRepo.saveAll(tacos)
+	                .map(taco -> {
+	                    order.addTaco(taco);
+	                    return order;
+	                })
+	                .switchIfEmpty(Mono.just(order)) 
+	                .last();
+	        })
+	        .flatMap(orderRepo::save);
+	}
+
+
  
  public Mono<TacoOrder> findById(Long id) {
-	 return orderRepo
-	 .findById(id)
-	 .flatMap(order -> {
-	return tacoRepo.findAllById(order.getTacoIds()) 
-	.map(taco -> {
-	order.addTaco(taco);
-	return order;
-	}).last();
-	 });
+	    return orderRepo.findById(id)
+	        .flatMap(order -> tacoRepo.findAllById(order.getTacoIds())
+	            .collectList()
+	            .map(tacos -> {
+	                order.setTacos(tacos); 
+	                return order;
+	            })
+	        );
 	}
-}
+
+	
+
+	}
+

@@ -20,6 +20,9 @@ public class SecurityConfig {
                     // Permit all POST and GET requests to /api/tacos
                     .requestMatchers(HttpMethod.POST, "/api/tacos").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/tacos/**").permitAll()
+                    // Permit POST and GET requests to /api/tacos/order
+                    .requestMatchers(HttpMethod.POST, "/api/tacos/order").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/tacos/order/**").permitAll()
                     // Any other requests must be authenticated
                     .anyRequest().authenticated()
             )
@@ -29,4 +32,3 @@ public class SecurityConfig {
         return http.build();
     }
 }
-

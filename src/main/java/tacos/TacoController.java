@@ -2,6 +2,8 @@ package tacos;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -58,8 +60,10 @@ public class TacoController {
     // Get a taco order by ID
     @GetMapping("/order/{id}")
     public Mono<TacoOrder> getTacoOrderById(@PathVariable Long id) {
-        return tacoOrderService.findById(id);
+        return tacoOrderService.findById(id)
+            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Taco Order not found"))); 
     }
+
 
     // List all tacos
     @GetMapping
@@ -67,5 +71,5 @@ public class TacoController {
         return tacoRepo.findAll();
     }
 
-    // Additional methods can be added for more functionality...
+  
 }
