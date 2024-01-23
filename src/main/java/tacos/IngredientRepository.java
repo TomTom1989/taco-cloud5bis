@@ -1,9 +1,9 @@
 package tacos;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import tacos.Ingredient;
-public interface IngredientRepository
-extends ReactiveCrudRepository<Ingredient, Long> {
- Mono<Ingredient> findBySlug(String slug);
+
+@CrossOrigin(origins="*")
+public interface IngredientRepository extends ReactiveCrudRepository<Ingredient, String> {
 }

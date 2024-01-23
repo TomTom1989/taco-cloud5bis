@@ -1,18 +1,7 @@
 spring:
-  r2dbc:
-    url: r2dbc:mariadb://localhost:3306/test3 
-    username: root 
-    password: password 
-    pool:
-      initial-size: 5
-      max-size: 20
-      max-idle-time: 30m
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test 
 
 server:
   port: 8080
-
-  
- 
-  sql:
-    init:
-      mode: always

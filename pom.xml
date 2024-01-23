@@ -69,13 +69,13 @@
         
  
 		
-		  <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
-        </dependency>
+		 
 		
 		 
-
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+</dependency>
 
 
 		
@@ -122,8 +122,8 @@
     <dependency>
         <groupId>io.projectreactor</groupId>
         <artifactId>reactor-core</artifactId>
-  
     </dependency>
+    
     <dependency>
         <groupId>io.projectreactor</groupId>
         <artifactId>reactor-test</artifactId>
@@ -132,11 +132,11 @@
     </dependency>
     
     
-      <dependency>
-        <groupId>org.mariadb</groupId>
-        <artifactId>r2dbc-mariadb</artifactId>
-        
+   <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-rest</artifactId>
     </dependency>
+  
     
     
     

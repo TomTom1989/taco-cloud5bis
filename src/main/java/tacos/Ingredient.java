@@ -1,20 +1,19 @@
 package tacos;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 @Data
-@NoArgsConstructor
-@RequiredArgsConstructor
-@EqualsAndHashCode(exclude = "id")
+@AllArgsConstructor
+@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+@Document
 public class Ingredient {
  @Id
- private Long id;
- private @NonNull String slug;
- private @NonNull String name;
- private @NonNull Type type;
+ private String id;
+ private String name;
+ private Type type;
  public static enum Type {
  WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
  }
