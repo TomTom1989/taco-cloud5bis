@@ -1,32 +1,21 @@
 package tacos;
-
-//import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.AllArgsConstructor;
-import java.io.Serializable;
-//import java.util.List;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-//import org.springframework.data.cassandra.core.mapping.Table;
-//import org.springframework.data.relational.core.mapping.Table;
-
+import lombok.RequiredArgsConstructor;
 @Data
-@Table("ingredients")
+@NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode(exclude = "id")
 public class Ingredient {
-    @Id
-    private Long id;
-
-    @NonNull
-    private String name;
-
-    @NonNull
-    private String type;
-
-   
+ @Id
+ private Long id;
+ private @NonNull String slug;
+ private @NonNull String name;
+ private @NonNull Type type;
+ public static enum Type {
+ WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+ }
 }

@@ -14,14 +14,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // other configurations
-            .authorizeRequests(authorize -> authorize
-                .requestMatchers("/ingredients/**").permitAll()
-                // specify other secured endpoints
-                .anyRequest().authenticated()
+            // Authorize requests configuration
+            .authorizeRequests(authorizeRequests ->
+                authorizeRequests
+                    // Permit all POST and GET requests to /api/tacos
+                    .requestMatchers(HttpMethod.POST, "/api/tacos").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/tacos/**").permitAll()
+                    // Any other requests must be authenticated
+                    .anyRequest().authenticated()
             )
-            // other configurations, like formLogin, httpBasic, logout, etc.
-            .csrf().disable(); // Only disable CSRF if you're sure about it
+            // CSRF is disabled for simplicity, but consider the implications in a real-world application
+            .csrf().disable();
 
         return http.build();
     }

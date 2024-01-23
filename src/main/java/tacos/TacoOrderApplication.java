@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TacoCloudReactive2Application {
+public class TacoOrderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TacoCloudReactive2Application.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(TacoOrderApplication.class, args);
+    }
 }
